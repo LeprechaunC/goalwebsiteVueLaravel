@@ -1,20 +1,29 @@
 <template>
   <header>
     <nav>
-      <div class="flex justify-between h-16 px-10 shadow items-center bg-white">
-        <!-- Logo and Nav links -->
+      <div class="flex justify-between items-center h-16 px-10 shadow bg-white">
+        <!-- Logo and Navigation Links -->
         <div class="flex items-center space-x-8">
-          <h1 class="text-xl font-bold cursor-pointer text-black">Reporter</h1>
+          <h1 class="text-xl font-bold text-black cursor-pointer">GoalTracker</h1>
 
           <!-- Desktop Menu -->
-          <div class="hidden justify-around space-x-4 md:flex">
-            <a href="#" class="relative text-gray-700 link-underline">Vacancies</a>
-            <a href="#" class="relative text-gray-700 link-underline">My Vacancies</a>
-            <a href="#" class="relative text-gray-700 link-underline">Favorites</a>
+          <div class="hidden md:flex space-x-4">
+            <a href="#" class="text-gray-700 hover:text-black relative group">
+              Daily Goals
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-black relative group">
+              Weekly Goals
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-black relative group">
+              Monthly Goals
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+            </a>
           </div>
         </div>
 
-        <!-- Menu for Login/Signup/Logout/Profile for Desktop - Hide for mobile view -->
+        <!-- User Account Links (Desktop Only) -->
         <div class="hidden md:flex">
           <HeaderButtons />
         </div>
@@ -30,12 +39,12 @@
       </div>
 
       <!-- Mobile Menu Dropdown -->
-      <div v-if="isOpen" class="bg-white shadow-lg px-6 py-4 space-y-2 md:hidden">
-        <a href="#" class="block text-gray-700 link-underline">Vacancies</a>
-        <a href="#" class="block text-gray-700 link-underline">My Vacancies</a>
-        <a href="#" class="block text-gray-700 link-underline">Favorites</a>
+      <div v-if="isOpen" class="md:hidden bg-white shadow-lg px-6 py-4 space-y-2">
+        <a href="#" class="block text-gray-700 hover:text-black">Daily Goals</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Weekly Goals</a>
+        <a href="#" class="block text-gray-700 hover:text-black">Monthly Goals</a>
 
-        <!-- Add HeaderButtons in the mobile dropdown -->
+        <!-- User Account Links in Mobile View -->
         <div class="border-t mt-2 pt-2">
           <HeaderButtons class="px-1" />
         </div>
@@ -78,20 +87,8 @@ const isOpen = ref(false);
 </script>
 
 <style scoped>
-.link-underline::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 3px;
-  bottom: -2px;
-  left: 0;
-  background-color: black; /* Indigo color */
-  visibility: hidden;
-  transition: all 0.5s ease-in-out;
-}
-
-.link-underline:hover::before {
-  visibility: visible;
+/* Custom underline animation */
+.group:hover span {
   width: 100%;
 }
 </style>
