@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PDFExportController;
+use App\Http\Controllers\GoalController;
 
 Route::middleware(['web'])->group(function () {
     Route::post('/register', [UserController::class, 'register']);
@@ -29,11 +29,15 @@ Route::middleware(['web'])->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
     Route::patch('/users/{user}/toggle-admin', [UserController::class, 'toggleAdmin']);
 
-    // '/api/status' returns 'API is working' if GET request succeeds
-    Route::get('/status', [ApiController::class, 'status']);
+ 
 
-    // Returns PDF with name, surname, email, phone number of the given user id
-    Route::get('/export-user-pdf/{id}', [PDFExportController::class, 'exportUserPDF']);
-    Route::get('/export-pdf-test', [PDFExportController::class, 'status']);
+    Route::get('/goals', [GoalController::class, 'index']); // <-- Add this line
+    Route::post('/goals', [GoalController::class, 'store']); // Rename create -> store to match GoalController
+ 
 
+Route::get('/goals', [GoalController::class, 'index']);
+Route::post('/goals', [GoalController::class, 'store']);
+Route::get('/goals/{id}', [GoalController::class, 'show']); // Fetch a single goal
+
+    
 });
